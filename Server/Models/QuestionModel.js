@@ -36,8 +36,13 @@ const QuestionSchema = new mongoose.Schema({
         type: String,
         required: true
     }],
+    // companies: [{
+    //     type: String,
+    //     required: true
+    // }],
     companies: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company',
         required: true
     }],
     created_at: {
