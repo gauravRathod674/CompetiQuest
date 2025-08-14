@@ -56,14 +56,14 @@ export default function Navbar() {
   };
 
   const navItems = [
+    { name: "Home", href: "#" },
+    { name: "Category", href: "#" },
     { name: "About", href: "#" },
-    { name: "Competitions", href: "#" },
-    { name: "Resources", href: "#" },
     { name: "Contact", href: "#" },
   ];
 
   return (
-    <header className="absolute top-0 left-0 w-full z-50 bg-transparent">
+    <header className="fixed top-0 inset-x-0 z-50 bg-muted/10 backdrop-blur-lg border-b border-border/50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <a href="#" className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function Navbar() {
             </button>
             <a
               href="#"
-              className="px-6 py-2 bg-accent text-accent-foreground font-semibold rounded-lg shadow-lg hover:bg-accent/90 transform hover:scale-105 transition-all duration-300"
+              className="px-5 py-1.5 border-2 border-accent text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300"
             >
               Login
             </a>
@@ -122,7 +122,7 @@ export default function Navbar() {
             <div className="pt-4 border-t border-border flex flex-col gap-4">
               <a
                 href="#"
-                className="block w-full text-center px-4 py-2 bg-accent text-accent-foreground rounded-lg hover:bg-accent/90 transition-colors font-semibold"
+                className="block w-full text-center px-4 py-2 border-2 border-accent text-accent rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors font-semibold"
               >
                Login
               </a>
