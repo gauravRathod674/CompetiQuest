@@ -1,26 +1,24 @@
 "use client";
+import { useTheme } from "../app/context/ThemeContext";
+import Image from "next/image";
 import { 
   FiSend, FiTwitter, FiInstagram, FiLinkedin, FiHome, 
   FiInfo, FiMail, FiCpu, FiBarChart2, FiType, FiGlobe, FiCode, FiZap
 } from "react-icons/fi";
-
-const Logo = () => (
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-foreground">
-      <path d="M16 30C23.732 30 30 23.732 30 16C30 8.26801 23.732 2 16 2C8.26801 2 2 8.26801 2 16C2 23.732 8.26801 30 16 30Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M19.9999 21.3333C17.7777 21.3333 16.2221 21.3333 14 21.3333C10.5333 21.3333 8.66663 19.4667 8.66663 16C8.66663 12.5333 10.5333 10.6667 14 10.6667C16.2221 10.6667 17.7777 10.6667 19.9999 10.6667" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+import Link from "next/link";
 
 const FooterLink = ({ icon, text, href }) => (
     <li>
-        <a href={href} className="flex items-center gap-3 hover:text-accent transition-colors">
+        <Link href={href} className="flex items-center gap-3 hover:text-accent transition-colors">
             {icon}
             <span>{text}</span>
-        </a>
+        </Link>
     </li>
 );
 
 export default function Footer() {
+  const { darkMode } = useTheme();
+
   const quickLinks = [
     { text: "Home", icon: <FiHome size={16} />, href: "#" },
     { text: "About", icon: <FiInfo size={16} />, href: "#" },
@@ -42,10 +40,18 @@ export default function Footer() {
           
           {/* Branding & About */}
           <div className="md:col-span-2 lg:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4">
-              <Logo />
-              <span className="text-2xl font-bold text-foreground">CompetiQuest</span>
-            </a>
+           <Link href="/" className="flex items-center gap-2 mb-4">
+                <Image
+                  src={darkMode ? "/Dark_Logo.png" : "/Light_Logo.png"}
+                  alt="Logo"
+                  width={35}
+                  height={35}
+                />
+                <span className="text-2xl font-bold">
+                  <span className="text-foreground">Competi</span>
+                  <span className="text-accent">Quest</span>
+                </span>
+              </Link>
             <p className="text-sm max-w-xs">
               Your one-stop destination for AI-powered competitive exam preparation.
             </p>
@@ -94,9 +100,9 @@ export default function Footer() {
             © {new Date().getFullYear()} CompetiQuest. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
-            <a href="#" className="hover:text-accent transition-colors"><FiTwitter /></a>
-            <a href="#" className="hover:text-accent transition-colors"><FiInstagram /></a>
-            <a href="#" className="hover:text-accent transition-colors"><FiLinkedin /></a>
+            <Link href="#" className="hover:text-accent transition-colors"><FiTwitter /></Link>
+            <Link href="#" className="hover:text-accent transition-colors"><FiInstagram /></Link>
+            <Link href="#" className="hover:text-accent transition-colors"><FiLinkedin /></Link>
           </div>
         </div>
       </div>
