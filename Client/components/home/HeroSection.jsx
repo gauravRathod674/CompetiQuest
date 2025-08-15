@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Squares from "./Squares";
-import { FiZap } from "react-icons/fi"; // Import icons
+import { FiZap, FiGrid  } from "react-icons/fi"; // Import icons
 import Link from "next/link";
 
 // Helper function to get Oklch parts for manipulation
@@ -110,9 +110,10 @@ export default function HeroSection() {
           </Link>
           <Link
             href="#"
-            className="px-7 py-3 border-2 border-accent text-accent font-bold rounded-xl transition-colors duration-300 hover:bg-accent hover:text-accent-foreground"
+            className="flex items-center gap-2 px-7 py-3 border-2 border-accent text-accent font-bold rounded-xl transition-colors duration-300 hover:bg-accent hover:text-accent-foreground"
           >
-            Browse Topics
+            <FiGrid />
+            <span>Browse Topics</span>
           </Link>
         </div>
       </div>
