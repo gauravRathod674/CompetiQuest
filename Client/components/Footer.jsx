@@ -34,21 +34,21 @@ export default function Footer() {
   const { darkMode } = useTheme();
 
   const quickLinks = [
-    { text: "Home", icon: <FiHome size={16} />, href: "#" },
-    { text: "About", icon: <FiInfo size={16} />, href: "#" },
-    { text: "Contact", icon: <FiMail size={16} />, href: "#" },
-    { text: "Mental Maths", icon: <FiZap size={16} />, href: "#" },
+    { text: "Home", icon: <FiHome size={16} />, href: "/" },
+    { text: "About", icon: <FiInfo size={16} />, href: "/#about-us" },
+    { text: "Contact", icon: <FiMail size={16} />, href: "/#contact-us" },
+    { text: "Mental Maths", icon: <FiZap size={16} />, href: "/mental_maths" },
   ];
   const categories = [
-    { text: "Aptitude", icon: <FiBarChart2 size={16} />, href: "#" },
-    { text: "Reasoning", icon: <FiCpu size={16} />, href: "#" },
-    { text: "English", icon: <FiType size={16} />, href: "#" },
-    { text: "General Knowledge", icon: <FiGlobe size={16} />, href: "#" },
-    { text: "Programming", icon: <FiCode size={16} />, href: "#" },
+    { text: "Aptitude", icon: <FiBarChart2 size={16} />, href: "/aptitude" },
+    { text: "Reasoning", icon: <FiCpu size={16} />, href: "/reasoning" },
+    { text: "English", icon: <FiType size={16} />, href: "/english" },
+    { text: "General Knowledge", icon: <FiGlobe size={16} />, href: "/general_knowledge" },
+    { text: "Programming", icon: <FiCode size={16} />, href: "/programming" },
   ];
 
   return (
-    <footer className="bg-secondary text-muted-foreground border-t border-border/50">
+    <footer className="bg-secondary/35 text-muted-foreground border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Branding & About */}

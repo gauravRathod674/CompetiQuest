@@ -15,6 +15,8 @@ import {
   FiType,
   FiGlobe,
   FiCode,
+  FiInfo,
+  FiMail,
 } from "react-icons/fi";
 import { useTheme } from "../app/context/ThemeContext";
 import Image from "next/image";
@@ -167,14 +169,16 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
 
           <nav className="flex-grow px-4 space-y-1.5 overflow-y-auto">
             <Link
-              href="#"
+              href="/"
               className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
+              onClick={closeSidebar}
             >
               <FiHome /> Home
             </Link>
             <Link
-              href="#"
+              href="/user_profile"
               className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
+               onClick={closeSidebar}
             >
               <FiUser /> User Profile
             </Link>
@@ -185,12 +189,27 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
                     key={item}
                     href="#"
                     className="block py-1.5 px-4 text-sm text-muted-foreground hover:text-accent rounded-md hover:bg-accent/10"
+                     onClick={closeSidebar}
                   >
                     {item}
                   </Link>
                 ))}
               </SidebarDropdown>
             ))}
+             <Link
+              href="/#about-us"
+              className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
+              onClick={closeSidebar}
+            >
+              <FiInfo /> About
+            </Link>
+            <Link
+              href="/#contact-us"
+              className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
+              onClick={closeSidebar}
+            >
+              <FiMail /> Contact
+            </Link>
           </nav>
 
           <div className="p-4 border-t border-border/50">
@@ -236,11 +255,11 @@ export default function Navbar() {
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
-              <NavLink href="#">Home</NavLink>
+              <NavLink href="/">Home</NavLink>
               <CategoryDropdown />
-              <NavLink href="#">Mental Maths</NavLink>
-              <NavLink href="#">About</NavLink>
-              <NavLink href="#">Contact</NavLink>
+              <NavLink href="/mental_maths">Mental Maths</NavLink>
+              <NavLink href="/#about-us">About</NavLink>
+              <NavLink href="/#contact-us">Contact</NavLink>
             </div>
 
             <div className="flex items-center space-x-4">
