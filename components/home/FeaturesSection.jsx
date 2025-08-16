@@ -8,7 +8,7 @@ import {
 } from "react-icons/fi";
 
 const features = [
-  { icon: <FiBarChart2 />, title: "Comprehensive Question Bank", text: "Master Aptitude, Reasoning, English, GK, and more." },
+  { icon: <FiBarChart2 />, title: "Extensive Question Bank", text: "Master Aptitude, Reasoning, English, GK, and more." },
   { icon: <FiZap />, title: "AI Chatbot Tutor", text: "Instant answers and topic explanations powered by AI." },
   { icon: <FiCpu />, title: "Progress Tracking", text: "Monitor your strengths and weaknesses in each section." },
   { icon: <FiType />, title: "Mental Maths", text: "Boost your calculation speed with interactive challenges." },
