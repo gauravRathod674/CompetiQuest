@@ -247,14 +247,14 @@ export default function Navbar() {
                   width={35}
                   height={35}
                 />
-                <span className="text-2xl font-bold hidden sm:inline">
+                <span className="text-2xl font-bold">
                   <span className="text-foreground">Competi</span>
                   <span className="text-accent">Quest</span>
                 </span>
               </Link>
             </div>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden min-[900px]:flex items-center space-x-8">
               <NavLink href="/">Home</NavLink>
               <CategoryDropdown />
               <NavLink href="/mental_maths">Mental Maths</NavLink>

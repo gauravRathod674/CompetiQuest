@@ -117,7 +117,8 @@ export default function HeroSection() {
           </Link>
         </div>
       </div>
-      
+
+      {/*  BLENDING MASK */}
       <div className="absolute bottom-0 left-0 right-0 h-35 bg-gradient-to-b from-background/0 to-background z-10 pointer-events-none" />
     </main>
   );
