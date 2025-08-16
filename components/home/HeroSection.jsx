@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Squares from "./Squares";
-import { FiZap, FiGrid  } from "react-icons/fi"; // Import icons
+import { FiZap, FiGrid  } from "react-icons/fi";
 import Link from "next/link";
 
 // Helper function to get Oklch parts for manipulation
@@ -47,7 +47,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col items-center justify-center bg-background overflow-hidden p-4">
+    <main className="relative h-screen w-full flex flex-col items-center justify-center bg-background overflow-hidden p-4">
       
       <div className="absolute inset-0 z-0">
         <Squares
@@ -117,6 +117,8 @@ export default function HeroSection() {
           </Link>
         </div>
       </div>
+      
+      <div className="absolute bottom-0 left-0 right-0 h-35 bg-gradient-to-b from-background/0 to-background z-10 pointer-events-none" />
     </main>
   );
 }
