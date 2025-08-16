@@ -155,7 +155,7 @@ const Pagination = ({
         p === "..." ? (
           <span
             key={`ellipsis-${idx}`}
-            className="w-10 h-10 grid border-2 rounded-md  place-items-center text-muted-foreground hover:text-accent hover:border-accent"
+            className="w-10 h-10 grid place-items-center text-muted-foreground"
           >
             <FiMoreHorizontal />
           </span>

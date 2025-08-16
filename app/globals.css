@@ -60,7 +60,7 @@
 
   --destructive: oklch(0.577 0.245 27.325);
 
-  --border: oklch(0.92 0.02 240); /* Light Gray */
+  --border: oklch(0.7 0.02 240); /* Light Gray */
   --input: oklch(0.95 0.03 90);
   --ring: oklch(0.536 0.17 21.3 / 0.6);
   --square-border-color: oklch(from var(--foreground) l c h / 0.01);
