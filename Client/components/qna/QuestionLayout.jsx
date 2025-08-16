@@ -29,7 +29,7 @@ const Question = ({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="bg-secondary/30 p-6 rounded-2xl border border-border/50 shadow-lg"
+      className="bg-secondary/40 p-6 rounded-2xl border border-border/50 shadow-lg"
     >
       <p className="mb-6 text-lg leading-relaxed">
         <span className="font-bold text-accent mr-2">
