@@ -1,6 +1,6 @@
 # 🎯 CompetiQuest
 
-**Your ultimate platform for mastering competitive exam questions, inspired by IndiaBix.**
+**Your ultimate platform for mastering competitive exam questions**
 
 CompetiQuest is a full-stack web application designed to help users practice and excel in various competitive exam topics. It provides a clean, fast, and interactive interface for topic-wise question solving, immediate feedback, and performance tracking.
 
