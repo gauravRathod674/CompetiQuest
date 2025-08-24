@@ -2,11 +2,11 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const SignupPage = ({ visible, handleClick }) => {
+const SignupPage = ({ visible, handleClick, handleFlip }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div
-      className="w-full h-full flex flex-col items-center justify-center p-12  backdrop-blur-xl"
+      className="w-full h-full flex flex-col items-center justify-center sm:p-12 py-5 px-5  backdrop-blur-xl"
       style={{
         opacity: visible ? 0 : 1,
         transition: "opacity 0.3s ease",
@@ -14,7 +14,7 @@ const SignupPage = ({ visible, handleClick }) => {
     >
       <h2 className="text-3xl font-bold mb-4 -mt-2 text-center">SignUp</h2>
       {/* Username */}
-      <div className="relative w-full mb-4">
+      <div className="relative w-full  mb-4">
         <input
           type="text"
           placeholder="Username"
@@ -62,7 +62,7 @@ const SignupPage = ({ visible, handleClick }) => {
         <hr className="flex-grow border-zinc-700" />
       </div>
 
-      <button className="cursor-pointer w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold bg-secondary/50 border hover:bg-secondary transition-colors duration-300">
+      <button className="cursor-pointer w-full py-1 sm:py-3 flex items-center justify-center sm:gap-2 rounded-xl font-semibold bg-secondary/50 border hover:bg-secondary transition-colors duration-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"
@@ -94,12 +94,12 @@ const SignupPage = ({ visible, handleClick }) => {
             d="M48 48L17 24l-4-3 35-10z"
           />
         </svg>
-        <span className="ml-4 ">SignUp with Google</span>
+        <span className="ml-4 text-sm">SignUp with Google</span>
       </button>
       <div>
         <p
-          className="text-sm text-accent cursor-pointer mt-2 sm:hidden"
-          onClick={handleClick}
+          className="text-sm text-accent text-center cursor-pointer mt-2 sm:hidden"
+          onClick={handleFlip}
         >
           Don't have an account? Signup
         </p>
