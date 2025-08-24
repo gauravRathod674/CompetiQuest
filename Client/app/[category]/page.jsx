@@ -30,7 +30,7 @@ export default function Category({ params }) {
   return (
     <div className="min-h-screen bg-background text-foreground pt-20">
       {/* Topic Header */}
-      <header className="relative h-55 flex items-center justify-center overflow-hidden ">
+      <header className="relative h-45 flex items-center justify-center overflow-hidden ">
         <div className="absolute inset-0 z-0 [mask-image:radial-gradient(ellipse_120%_90%_at_center,black_40%,transparent_90%)]">
           <Squares
             speed={0.1}
@@ -51,7 +51,7 @@ export default function Category({ params }) {
 
         <div className="relative z-10 flex items-center justify-center gap-5 sm:gap-10">
           <FiClock
-            className="text-[#bb5052] text-[4rem] sm:text-[10rem] 
+            className="text-[#bb5052] text-[2rem] sm:text-[5rem] 
               drop-shadow-[0_0_40px_var(--accent-glow)] flex-shrink-0"
           />
 
@@ -63,40 +63,6 @@ export default function Category({ params }) {
               {category.charAt(0).toUpperCase() +
                 category.slice(1).replace(/_/g, " ")}
             </h1>
-
-            <div className="mt-6 w-full">
-              <div className="flex items-center gap-3">
-                <div
-                  className="flex-1 max-w-sm h-2 rounded-full bg-border overflow-hidden 
-                    drop-shadow-[0_0_12px_var(--accent-glow)]"
-                >
-                  <div
-                    className="h-full bg-[#bb5052] transition-all"
-                    style={{
-                      width: `${Math.min(
-                        (((pageNumber - 1) * questionsPerPage +
-                          paginatedQuestions.length) /
-                          totalQuestions) *
-                          100,
-                        100
-                      )}%`,
-                    }}
-                  />
-                </div>
-
-                <div
-                  className="flex items-center gap-1 text-lg font-medium text-foreground 
-                    drop-shadow-[0_0_12px_var(--accent-glow)]"
-                >
-                  <span>
-                    {(pageNumber - 1) * questionsPerPage +
-                      paginatedQuestions.length}{" "}
-                    / {totalQuestions}
-                  </span>
-                  <FiClock className="ml-1 text-accent drop-shadow-[0_0_10px_var(--accent-glow)]" />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
