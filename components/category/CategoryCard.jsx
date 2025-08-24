@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter, usePathname } from "next/navigation";
+
 export default function CategoryCard({
   title,
   chapters,
@@ -11,6 +13,16 @@ export default function CategoryCard({
   const strokeDasharray = 2 * Math.PI * radius;
   const strokeDashoffset = strokeDasharray * (1 - progress);
   const progressPercentage = Math.round(progress * 100);
+  const router = useRouter();
+
+  const pathname = usePathname(); // gets current full route
+  const handleClick = (title) => {
+    const formatTitle = (title) =>
+      decodeURIComponent(title).replace(/\s+/g, "_").toLowerCase();
+
+    const t = formatTitle(title); // ← call the function with the argument
+    router.push(`${pathname}/${t}/page1`);
+  };
 
   return (
     <div className="relative w-full max-w-sm h-80 flex flex-col overflow-hidden rounded-3xl shadow-xl shadow-accent/10 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
@@ -28,7 +40,10 @@ export default function CategoryCard({
           <div className="absolute h-36 w-36 rounded-full border-8 border-white border-opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin-slow-reverse"></div>
         </div>
         {/* Progress circle SVG */}
-        <div className="absolute -bottom-10 right-4 z-10">
+        <div
+          className="absolute -bottom-10 right-4 z-10 "
+          onClick={() => handleClick(title.toLowerCase())}
+        >
           <PlayButton
             progressPercentage={progressPercentage}
             strokeDasharray={strokeDasharray}

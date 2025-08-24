@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const LoginPage = ({ visible, handleClick }) => {
+const LoginPage = ({ visible, handleClick, handleFlip }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ const LoginPage = ({ visible, handleClick }) => {
 
   return (
     <div
-      className="w-full h-full flex flex-col items-center justify-center p-12 bg-muted/10 backdrop-blur-xl"
+      className="w-full h-full flex flex-col items-center justify-center sm:p-12 p-5 bg-muted/10 backdrop-blur-xl"
       style={{
         opacity: visible ? 1 : 0,
         transition: "opacity 0.3s ease",
@@ -139,7 +139,7 @@ const LoginPage = ({ visible, handleClick }) => {
       <div>
         <p
           className="text-sm text-accent cursor-pointer mt-2 "
-          onClick={handleClick}
+          onClick={handleFlip}
         >
           Don't have an account? Signup
         </p>

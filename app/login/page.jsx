@@ -4,28 +4,27 @@ import Squares from "@/components/home/Squares";
 import { useState } from "react";
 import LoginPage from "@/components/login/LoginPage";
 import SignupPage from "@/components/login/SignupPage";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const [themeColors, setThemeColors] = useState({
     border: "oklch(0.15 0 0 / 0.1)",
     hover: "#222",
   });
-  // const [isSignUp, setIsSignUp] = useState(false);
-  // const [showPassword, setShowPassword] = useState(false);
-  // // Handler to switch to the sign-up panel
-  // const handleSignUpClick = () => {
-  //   setIsSignUp(!isSignUp);
-  // };
-  const [isSignUp, setIsSignUp] = useState(false);
 
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [loginflip, setLoginflip] = useState(true); // Default to true for LoginPage
+
+  const handleFlip = () => {
+    setLoginflip(!loginflip);
+  };
   const handleSignUpClick = () => {
     setIsSignUp(true);
+    setLoginflip(false); // Show SignupPage in mobile
   };
-
   const handleLoginClick = () => {
     setIsSignUp(false);
+    setLoginflip(true); // Show LoginPage in mobile
   };
 
   return (
@@ -60,20 +59,41 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="relative w-[100vw] max-w-3xl h-[70vh] bg-muted/40  rounded-2xl overflow-hidden shadow-md p-3 shadow-accent">
-        <div
-          className={`flex flex-row  transition-transform duration-700 ease-in-out`}
-        >
-          <span className="max-w-[100vw]">
-            <LoginPage visible={isSignUp} handleClick={handleSignUpClick} />
-          </span>
-          <span className="">
-            <SignupPage visible={isSignUp} handleClick={handleLoginClick} />
-          </span>
+      <div className="relative w-[100vw] sm:max-w-3xl h-[70%] sm:h-[70vh] bg-muted/40 rounded-2xl overflow-hidden shadow-md p-3 shadow-accent max-w-[100%]">
+        {/* Desktop View */}
+        <div className="sm:flex sm:flex-row sm:justify-evenly hidden">
+          <LoginPage
+            visible={isSignUp}
+            handleClick={handleSignUpClick}
+            handleFlip={handleFlip}
+          />
+          <SignupPage
+            visible={isSignUp}
+            handleClick={handleLoginClick}
+            handleFlip={handleFlip}
+          />
         </div>
 
+        {/* Mobile View */}
+        <div className="sm:hidden block">
+          {loginflip ? (
+            <LoginPage
+              handleFlip={handleFlip}
+              visible={!isSignUp}
+              handleClick={handleSignUpClick}
+            />
+          ) : (
+            <SignupPage
+              handleFlip={handleFlip}
+              visible={isSignUp}
+              handleClick={handleLoginClick}
+            />
+          )}
+        </div>
+
+        {/* Sliding Panel for Desktop */}
         <div
-          className="absolute top-0 left-0 w-1/2 h-full hidden  bg-accent dark:bg-ring  sm:flex flex-col items-center justify-center transition-transform duration-700 ease-in-out z-10"
+          className="absolute top-0 left-0 w-1/2 h-full hidden sm:flex flex-col items-center justify-center transition-transform duration-700 ease-in-out z-10 bg-accent dark:bg-ring"
           style={{
             transform: isSignUp ? "translateX(100%)" : "translateX(0%)",
           }}
@@ -81,13 +101,13 @@ export default function Login() {
           <h2 className="text-4xl dark:text-secondary-foreground text-muted font-bold">
             {!isSignUp ? "Welcome Back" : "New Here"}
           </h2>
-          <p className="text-md  dark:text-secondary-foreground/70 text-muted/50 mt-2  text-center px-6 tracking-tight">
+          <p className="text-md dark:text-secondary-foreground/70 text-muted/50 mt-2 text-center px-6 tracking-tight">
             {!isSignUp
               ? "Already have an account? Log in to continue."
               : "Don't have an account? Sign up to get started."}
           </p>
           <button
-            className="  px-6 py-2 rounded-r-full mt-4 rounded-l-full font-semibold border-2 text-secondary dark:border-secondary-foreground dark:text-secondary-foreground border-secondary hover:bg-secondary hover:text-accent dark:hover:bg-secondary-foreground dark:hover:text-accent transition"
+            className="px-6 py-2 rounded-r-full mt-4 rounded-l-full font-semibold border-2 text-secondary dark:border-secondary-foreground dark:text-secondary-foreground border-secondary hover:bg-secondary hover:text-accent dark:hover:bg-secondary-foreground dark:hover:text-accent transition"
             onClick={isSignUp ? handleLoginClick : handleSignUpClick}
           >
             {!isSignUp ? "Login" : "Sign up"}
