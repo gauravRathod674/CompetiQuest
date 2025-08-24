@@ -176,7 +176,7 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
               <FiHome /> Home
             </Link>
             <Link
-              href="/user_profile"
+              href="/profile"
               className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
                onClick={closeSidebar}
             >
