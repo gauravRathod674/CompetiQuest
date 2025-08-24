@@ -183,37 +183,36 @@ export default function UserProfile() {
         {/* Progress Card */}
         <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2`}>
           {/* Circular Progress - Left side */}
-          <div className="relative w-20 h-20 md:w-28 md:h-28 flex-shrink-0 ml-2">
-            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                className="stroke-gray-300 dark:stroke-gray-600"
-                strokeWidth="6"
-                fill="none"
-              />
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                className="stroke-accent transition-all duration-700 ease-out"
-                strokeWidth="6"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray={2 * Math.PI * 45}
-                strokeDashoffset={2 * Math.PI * 45 - (profile.solved / profile.total) * 2 * Math.PI * 45}
-              />
-            </svg>
-            
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <p className="text-base md:text-lg font-bold text-foreground dark:text-white">
-                {profile.solved}/{profile.total}
-              </p>
-              <p className="text-xs text-accent font-medium">✓ Solved</p>
-             
-            </div>
-          </div>
+<div className="relative w-24 h-24 md:w-40 md:h-40 flex-shrink-0 ml-2">
+  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+    <circle
+      cx="60"
+      cy="60"
+      r="52"
+      className="stroke-gray-300 dark:stroke-gray-600"
+      strokeWidth="8"
+      fill="none"
+    />
+    <circle
+      cx="60"
+      cy="60"
+      r="52"
+      className="stroke-accent transition-all duration-700 ease-out"
+      strokeWidth="8"
+      fill="none"
+      strokeLinecap="round"
+      strokeDasharray={2 * Math.PI * 52}
+      strokeDashoffset={2 * Math.PI * 52 - (profile.solved / profile.total) * 2 * Math.PI * 52}
+    />
+  </svg>
+  
+  <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+    <p className="text-lg md:text-xl font-bold text-foreground dark:text-white">
+      {profile.solved}/{profile.total}
+    </p>
+    <p className="text-xs md:text-sm text-accent font-medium mt-1">✓ Solved</p>
+  </div>
+</div>
           
           {/* Difficulty Stats - Right side */}
           <div className="flex-1 ml-6">
