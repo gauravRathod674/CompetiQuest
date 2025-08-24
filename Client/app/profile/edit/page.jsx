@@ -49,15 +49,15 @@ export default function EditProfile() {
   };
 
   return (
-    <div className={`min-h-screen p-6 flex justify-center ${darkMode ? "bg-secondary/35" : "bg-secondary/35"}`}>
-      <div className="max-w-4xl w-full">
+    <div className={`min-h-screen p-6 flex items-center justify-center ${darkMode ? "bg-secondary/35" : "bg-secondary/35"}`}>
+      <div className="max-w-4xl w-full ">
         {/* Header */}
         <div className="flex items-center mb-6">
           <button
             onClick={() => router.back()}
             className="mr-4 p-2 rounded-full hover:bg-accent/10 transition-colors"
           >
-            <FiArrowLeft size={20} />
+            
           </button>
           <h1 className={`text-2xl font-bold ${darkMode ? "text-foreground" : "text-foreground"}`}>Edit Profile</h1>
         </div>

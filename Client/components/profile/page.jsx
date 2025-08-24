@@ -182,7 +182,7 @@ export default function UserProfile() {
 </div>
 
         {/* Progress Card */}
-        <div className="bg-accent/20  text-accent font-semibold   rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2">
+        <div className= {`${darkMode ? "bg-secondary/35" : "bg-white"}  "text-accent font-semibold   rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2`}>
           {/* Circular Progress - Left side */}
 <div className="relative w-24 h-24 md:w-40 md:h-40 flex-shrink-0 ml-2">
   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
@@ -216,18 +216,18 @@ export default function UserProfile() {
 </div>
           
           {/* Difficulty Stats - Right side */}
-          <div className="flex-1 ml-6">
-            <div className="flex flex-col gap-2 md:gap-3">
-              <div className="text-right">
+          <div className="flex-1 ml-6 ">
+            <div className="flex flex-col gap-2 md:gap-3 bg-accent/30 font-semibold rounded-lg ">
+              <div className="text-center">
                 <div className="">
-                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Easy</span>
+                  <span className="text-sm md:text-base  text-accent dark:text-accent">Easy</span>
                 </div>
                 <span className="text-xs md:text-sm font-normal text-accent">
                   {profile.easy.solved}/{profile.easy.total}
                 </span>
               </div>
 
-              <div className="text-right">
+              <div className="text-center">
                 <div className="">
                   <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Medium</span>
                 </div>
@@ -236,7 +236,7 @@ export default function UserProfile() {
                 </span>
               </div>
 
-              <div className="text-right">
+              <div className="text-center">
                 <div className="">
                   <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Hard</span>
                 </div>
@@ -380,7 +380,7 @@ export default function UserProfile() {
             {topic.subcategories.map((subtopic, subIndex) => (
               <div 
                 key={subIndex} 
-                className="px-6 py-3 bg-accent/20 text-accent rounded-lg mb-3 transition-colors duration-300 hover:bg-accent hover:text-accent-foreground group"
+                className="px-6 py-3 bg-accent/20 text-muted-foreground rounded-lg mb-3 transition-colors duration-300 hover:bg-accent hover:text-accent-foreground group"
                 onMouseEnter={() => {
   const progressBar = document.getElementById(`progress-${index}-${subIndex}`);
   if (progressBar) {
