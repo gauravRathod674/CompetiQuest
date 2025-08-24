@@ -182,7 +182,7 @@ export default function UserProfile() {
 </div>
 
         {/* Progress Card */}
-        <div className= {`${darkMode ? "bg-secondary/35" : "bg-white"}  "text-accent font-semibold   rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2`}>
+        <div className= {`${darkMode ? "bg-secondary/35" : "bg-white"}  "text-accent font-semibold   rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center border border-border/40 w-full lg:w-1/2`}>
           {/* Circular Progress - Left side */}
 <div className="relative w-24 h-24 md:w-40 md:h-40 flex-shrink-0 ml-2">
   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
@@ -216,9 +216,9 @@ export default function UserProfile() {
 </div>
           
           {/* Difficulty Stats - Right side */}
-          <div className="flex-1 ml-6 ">
-            <div className="flex flex-col gap-2 md:gap-3 bg-accent/30 font-semibold rounded-lg ">
-              <div className="text-center">
+          <div className="flex-1 ml-30 ">
+            <div className="flex flex-col gap-2 md:gap-3 ">
+              <div className="text-center bg-accent/30 font-semibold rounded-lg w-30">
                 <div className="">
                   <span className="text-sm md:text-base  text-accent dark:text-accent">Easy</span>
                 </div>
@@ -227,7 +227,7 @@ export default function UserProfile() {
                 </span>
               </div>
 
-              <div className="text-center">
+              <div className="text-center bg-accent/30 font-semibold rounded-lg w-30">
                 <div className="">
                   <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Medium</span>
                 </div>
@@ -236,7 +236,7 @@ export default function UserProfile() {
                 </span>
               </div>
 
-              <div className="text-center">
+              <div className="text-center bg-accent/30 font-semibold rounded-lg w-30">
                 <div className="">
                   <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Hard</span>
                 </div>
@@ -248,6 +248,7 @@ export default function UserProfile() {
           </div>
         </div>
       </div>
+
 
       {/* Calendar Section */}
       <div className={`w-full ${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-6 border border-border/50 mb-6`}>
@@ -324,7 +325,6 @@ export default function UserProfile() {
   </div>
 </div>
       </div>
-
      {/* Topic Coverage Section */}
 <div className="w-full">
   <h3 className="text-xl font-semibold mb-4 text-foreground">Topic Coverage</h3>
