@@ -36,7 +36,7 @@ const CategoryDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const categories = [
     "Aptitude",
-    "Reasoning",
+    "Logical Reasoning",
     "English",
     "General Knowledge",
     "Programming",
@@ -63,7 +63,7 @@ const CategoryDropdown = () => {
           {categories.map((cat) => (
             <Link
               key={cat}
-              href="#"
+              href={`/${cat.toLowerCase().replace(/ /g, "_")}`}
               className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             >
               {cat}
@@ -178,7 +178,7 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
             <Link
               href="/user_profile"
               className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
-               onClick={closeSidebar}
+              onClick={closeSidebar}
             >
               <FiUser /> User Profile
             </Link>
@@ -189,14 +189,14 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
                     key={item}
                     href="#"
                     className="block py-1.5 px-4 text-sm text-muted-foreground hover:text-accent rounded-md hover:bg-accent/10"
-                     onClick={closeSidebar}
+                    onClick={closeSidebar}
                   >
                     {item}
                   </Link>
                 ))}
               </SidebarDropdown>
             ))}
-             <Link
+            <Link
               href="/#about-us"
               className="flex items-center gap-3 py-2.5 px-4 hover:bg-accent/10 hover:text-accent rounded-md transition-colors duration-200"
               onClick={closeSidebar}
@@ -281,7 +281,7 @@ export default function Navbar() {
                 />
               </button>
               <Link
-                href="#"
+                href="/login"
                 className="hidden sm:block px-6 py-2 bg-accent/20 text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300"
               >
                 Login
