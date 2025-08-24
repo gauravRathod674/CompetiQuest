@@ -1,11 +1,9 @@
-
 "use client";
 
 import React, { useState } from "react";
 import { FiEdit2, FiChevronDown, FiChevronUp, FiCalendar } from "react-icons/fi";
 import { useTheme } from "../../app/context/ThemeContext";
 import Link from 'next/link'; 
-
 
 let MotionDiv;
 let MotionSpan;
@@ -19,7 +17,6 @@ try {
   MotionButton = motion.motion.button;
   MotionCircle = motion.motion.circle;
 } catch (error) {
- 
   MotionDiv = ({ children, ...props }) => <div {...props}>{children}</div>;
   MotionSpan = ({ children, ...props }) => <span {...props}>{children}</span>;
   MotionButton = ({ children, ...props }) => <button {...props}>{children}</button>;
@@ -28,6 +25,8 @@ try {
 
 export default function UserProfile() {
   const [openCategory, setOpenCategory] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [showYearDropdown, setShowYearDropdown] = useState(false);
   const { darkMode } = useTheme();
   
   const primaryColor = "oklch(0.536 0.17 21.3)";
@@ -109,18 +108,17 @@ export default function UserProfile() {
         ]
       }
     ],
-  
     calendarData: generateCalendarData()
   };
 
-  
+  // Function to generate calendar data for last 6 months only
   function generateCalendarData() {
     const months = [];
     const today = new Date();
-    const twelveMonthsAgo = new Date();
-    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 11); 
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5); // Show 6 months total
     
-    for (let m = new Date(twelveMonthsAgo); m <= today; m.setMonth(m.getMonth() + 1)) {
+    for (let m = new Date(sixMonthsAgo); m <= today; m.setMonth(m.getMonth() + 1)) {
       const monthName = m.toLocaleString('default', { month: 'short' });
       const year = m.getFullYear();
       const daysInMonth = new Date(year, m.getMonth() + 1, 0).getDate();
@@ -158,107 +156,134 @@ export default function UserProfile() {
     }
   };
 
+  // Generate years for dropdown (current year and previous 2 years)
+  const currentYear = new Date().getFullYear();
+  const yearOptions = [currentYear, currentYear - 1, currentYear - 2];
+
   return (
-    <div className="min-h-screen flex flex-col p-4 md:p-10 bg-secondary/35">
- 
-  <div className="flex flex-col lg:flex-row gap-6 w-full mb-6">
-    
-    
-    <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-4 md:p-6 flex items-center border border-border/50 w-full lg:w-1/2`}>
-      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-accent/20">
-        <span className="text-2xl md:text-3xl text-accent">👤</span>
-      </div>
-      <div className="ml-4 md:ml-6">
-        <h2 className="text-lg md:text-xl font-semibold text-foreground">{profile.username}</h2>
-        <Link href="/profile/edit">
-          <button className="mt-2 flex items-center gap-2 px-4 md:px-6 py-2 bg-accent/20 text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300 text-sm md:text-base">
-            <FiEdit2 size={14} />
-            Edit Profile
-          </button>
-        </Link>
-      </div>
-    </div>
-
-
-    <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-xl shadow-sm p-6 pl-19 pr-19 flex items-center justify-between border border-border/40 w-full lg:w-1/2`}>
-      {/* Circular Progress - Left side */}
-      <div className="relative w-20 h-20 md:w-28 md:h-28 flex-shrink-0 ml-2">
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            className="stroke-gray-300 dark:stroke-gray-600"
-            strokeWidth="6"
-            fill="none"
-          />
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            className="stroke-accent transition-all duration-700 ease-out"
-            strokeWidth="6"
-            fill="none"
-            strokeLinecap="round"
-            strokeDasharray={2 * Math.PI * 45}
-            strokeDashoffset={2 * Math.PI * 45 - (profile.solved / profile.total) * 2 * Math.PI * 45}
-          />
-        </svg>
-        
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-base md:text-lg font-bold text-foreground dark:text-white">
-            {profile.solved}/{profile.total}
-          </p>
-          <p className="text-xs text-accent font-medium">✓ Solved</p>
-          <p className="text-[10px] text-muted-foreground dark:text-gray-400 mt-0.5">
-            {profile.attempting} Attempting
-          </p>
-        </div>
-      </div>
-      
-      
-      <div className="flex-1 ml-6">
-        <div className="flex flex-col gap-3 md:gap-4">
-          <div className="text-right">
-            <div className="mb-1">
-              <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Easy</span>
-            </div>
-            <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
-              {profile.easy.solved}/{profile.easy.total}
-            </span>
+    <div className="min-h-screen flex flex-col p-6  mt-6 md:p-10 lg:px-20 bg-secondary/35"> 
+      {/* Top cards row */}
+      <div className="flex flex-col lg:flex-row gap-6 w-full mb-6">
+        {/* Left Profile Card */}
+        <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-4 md:p-6 flex items-center border border-border/50 w-full lg:w-1/2`}>
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-accent/20">
+            <span className="text-2xl md:text-3xl text-accent">👤</span>
           </div>
-
-          <div className="text-right">
-            <div className="mb-1">
-              <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Medium</span>
-            </div>
-            <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
-              {profile.medium.solved}/{profile.medium.total}
-            </span>
-          </div>
-
-          <div className="text-right">
-            <div className="mb-1">
-              <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Hard</span>
-            </div>
-            <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
-              {profile.hard.solved}/{profile.hard.total}
-            </span>
+          <div className="ml-4 md:ml-6">
+            <h2 className="text-lg md:text-xl font-semibold text-foreground">{profile.username}</h2>
+            <Link href="/profile/edit">
+              <button className="mt-2 flex items-center gap-2 px-4 md:px-6 py-2 bg-accent/20 text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300 text-sm md:text-base">
+                <FiEdit2 size={14} />
+                Edit Profile
+              </button>
+            </Link>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
- 
- 
-  
+        {/* Progress Card */}
+        <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2`}>
+          {/* Circular Progress - Left side */}
+          <div className="relative w-20 h-20 md:w-28 md:h-28 flex-shrink-0 ml-2">
+            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                className="stroke-gray-300 dark:stroke-gray-600"
+                strokeWidth="6"
+                fill="none"
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                className="stroke-accent transition-all duration-700 ease-out"
+                strokeWidth="6"
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 45}
+                strokeDashoffset={2 * Math.PI * 45 - (profile.solved / profile.total) * 2 * Math.PI * 45}
+              />
+            </svg>
+            
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <p className="text-base md:text-lg font-bold text-foreground dark:text-white">
+                {profile.solved}/{profile.total}
+              </p>
+              <p className="text-xs text-accent font-medium">✓ Solved</p>
+             
+            </div>
+          </div>
+          
+          {/* Difficulty Stats - Right side */}
+          <div className="flex-1 ml-6">
+            <div className="flex flex-col gap-3 md:gap-4">
+              <div className="text-right">
+                <div className="mb-1">
+                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Easy</span>
+                </div>
+                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                  {profile.easy.solved}/{profile.easy.total}
+                </span>
+              </div>
+
+              <div className="text-right">
+                <div className="mb-1">
+                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Medium</span>
+                </div>
+                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                  {profile.medium.solved}/{profile.medium.total}
+                </span>
+              </div>
+
+              <div className="text-right">
+                <div className="mb-1">
+                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Hard</span>
+                </div>
+                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                  {profile.hard.solved}/{profile.hard.total}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Calendar Section */}
-      <div className={`mt-6 w-full  ${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-6 border border-border/50`}>
-        <div className="flex items-center mb-4">
-          <FiCalendar className="mr-2 text-accent" />
-          <h3 className="text-lg font-semibold text-foreground">Problem Solving Calendar</h3>
+      <div className={`w-full ${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-6 border border-border/50 mb-6`}>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <FiCalendar className="mr-2 text-accent" />
+            <h3 className="text-lg font-semibold text-foreground">Problem Solving Calendar</h3>
+          </div>
+          
+          {/* Year Dropdown */}
+          <div className="relative">
+            <button 
+              onClick={() => setShowYearDropdown(!showYearDropdown)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border/50 bg-white dark:bg-secondary/35 text-foreground"
+            >
+              {selectedYear}
+              <FiChevronDown />
+            </button>
+            
+            {showYearDropdown && (
+              <div className="absolute right-0 mt-1 w-full bg-white dark:bg-secondary/35 border border-border/50 rounded-lg shadow-lg z-10">
+                {yearOptions.map(year => (
+                  <button
+                    key={year}
+                    onClick={() => {
+                      setSelectedYear(year);
+                      setShowYearDropdown(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-accent/10 text-foreground"
+                  >
+                    {year}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex justify-between mb-6">
@@ -270,122 +295,138 @@ export default function UserProfile() {
             <p className="text-2xl font-bold text-foreground">{profile.maxStreak}</p>
             <p className="text-sm text-muted-foreground">Max Streak</p>
           </div>
-          <div className="text-center">
-            <p className="text-2xl font-bold text-foreground">{profile.solved}</p>
-            <p className="text-sm text-muted-foreground">Total Solved</p>
-          </div>
+        
         </div>
 
-        <div className="pb-2 overflow-hidden">
-          <div className="flex flex-wrap gap-4">
-            {profile.calendarData.map((month, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="text-xs font-medium mb-2 text-foreground">
-                  {month.name}
-                </div>
-
-               
-                <div className="grid grid-cols-4 gap-1">
-                  {month.days.map((day, dayIndex) => (
-                    <div
-                      key={dayIndex}
-                      className={`w-4 h-4 rounded-sm flex items-center justify-center text-[10px] ${getColorIntensity(day.count)}
-                        ${day.count > 0 ? 'cursor-pointer hover:opacity-80' : ''} ${darkMode && day.count === 0 ? 'text-muted-foreground' : 'text-foreground'}`}
-                      title={`${day.date}: ${day.count} problems solved`}
-                    >
-                      {day.count > 0 ? day.count : ''}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="pb-2">
+  <div className="flex gap-3 justify-evenly">
+    {profile.calendarData.map((month, index) => (
+      <div key={index} className="flex flex-col items-center flex-1">
+        <div className="text-xs font-medium mb-1 text-foreground">
+          {month.name}
         </div>
-      </div>
 
-      {/* Topic Coverage Section */}
-      <div className="mt-6 w-full ">
-        <h3 className="text-xl font-semibold mb-4 text-foreground">Topic Coverage</h3>
-        <div className="space-y-4">
-          {profile.topics.map((topic, index) => (
-            <div key={index} className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md overflow-hidden border border-border/50`}>
-              <button 
-                className="w-full p-4 flex justify-between items-center text-left hover:bg-accent/5 transition-colors duration-200"
-                onClick={() => toggleCategory(index)}
-                style={{ backgroundColor: openCategory === index ? `${primaryColor}20` : 'transparent' }}
-              >
-                <div className="flex items-center">
-                  <div className="relative w-5 h-5 mr-3">
-                    <svg className="w-5 h-5 transform -rotate-90">
-                      <circle
-                        cx="10"
-                        cy="10"
-                        r="8"
-                        stroke="blue"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <circle
-                        cx="10"
-                        cy="10"
-                        r="8"
-                        stroke={primaryColor}
-                        strokeWidth="2"
-                        fill="none"
-                        strokeDasharray={2 * Math.PI * 8}
-                        strokeDashoffset={2 * Math.PI * 8 - (topic.percentage / 100) * 2 * Math.PI * 8}
-                      />
-                    </svg>
-                  </div>
-                  <span className="font-medium text-foreground">{topic.name}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-sm font-semibold mr-3" style={{ color: primaryColor }}>
-                    {topic.percentage}%
-                  </span>
-                  {openCategory === index ? <FiChevronUp className="text-muted-foreground" /> : <FiChevronDown className="text-muted-foreground" />}
-                </div>
-              </button>
-              
-              {openCategory === index && (
-                <MotionDiv
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="px-4 pb-4"
-                >
-                  {topic.subcategories.map((subtopic, subIndex) => (
-                    <div key={subIndex} className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-xl shadow-sm p-4 mb-3 hover:shadow-md transition-shadow duration-300 ml-4`}>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium text-muted-foreground">
-                          {subtopic.name}
-                        </span>
-                        <span className="text-sm font-semibold" style={{ color: primaryColor }}>
-                          {subtopic.percentage}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-border/50 rounded-full h-2 overflow-hidden">
-                        <div
-                          className="h-2 rounded-full transition-all duration-1000"
-                          style={{ 
-                            backgroundColor: primaryColor, 
-                            width: `${subtopic.percentage}%` 
-                          }}
-                        />
-                      </div>
-                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                        <span>{subtopic.solved} solved</span>
-                        <span>{subtopic.total} total</span>
-                      </div>
-                    </div>
-                  ))}
-                </MotionDiv>
-              )}
+        {/* Show date numbers instead of question counts */}
+        <div className="grid grid-cols-6 gap-1">
+          {month.days.map((day, dayIndex) => (
+            <div
+              key={dayIndex}
+              className={`w-5 h-5 rounded-sm flex items-center justify-center text-[10px] ${getColorIntensity(day.count)} ${darkMode ? 'text-white' : 'text-foreground'}`}
+              title={`${day.date}: ${day.count} problems solved`}
+            >
+              {day.day}
             </div>
           ))}
         </div>
       </div>
+    ))}
+  </div>
+</div>
+      </div>
+
+     {/* Topic Coverage Section */}
+<div className="w-full">
+  <h3 className="text-xl font-semibold mb-4 text-foreground">Topic Coverage</h3>
+  <div className="space-y-4">
+    {profile.topics.map((topic, index) => (
+      <div key={index} className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md overflow-hidden border border-border/50`}>
+        <button 
+          className="w-full p-4 flex justify-between items-center text-left hover:bg-accent/10 transition-colors duration-300"
+          onClick={() => toggleCategory(index)}
+          style={{ backgroundColor: openCategory === index ? `${primaryColor}20` : 'transparent' }}
+        >
+          <div className="flex items-center">
+            <div className="relative w-5 h-5 mr-3">
+              <svg className="w-5 h-5 transform -rotate-90">
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="8"
+                  stroke="blue"
+                  strokeWidth="2"
+                  fill="none"
+                />
+                <circle
+                  cx="10"
+                  cy="10"
+                  r="8"
+                  stroke={primaryColor}
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray={2 * Math.PI * 8}
+                  strokeDashoffset={2 * Math.PI * 8 - (topic.percentage / 100) * 2 * Math.PI * 8}
+                />
+              </svg>
+            </div>
+            <span className="font-medium text-foreground">{topic.name}</span>
+          </div>
+          <div className="flex items-center">
+            <span className="text-sm font-semibold mr-3" style={{ color: primaryColor }}>
+              {topic.percentage}%
+            </span>
+            {openCategory === index ? <FiChevronUp className="text-muted-foreground" /> : <FiChevronDown className="text-muted-foreground" />}
+          </div>
+        </button>
+        
+        {openCategory === index && (
+          <MotionDiv
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-4 pb-4"
+          >
+            {topic.subcategories.map((subtopic, subIndex) => (
+              <div 
+                key={subIndex} 
+                className="px-6 py-3 bg-accent/20 text-accent rounded-lg mb-3 transition-colors duration-300 hover:bg-accent hover:text-accent-foreground group"
+                onMouseEnter={() => {
+  const progressBar = document.getElementById(`progress-${index}-${subIndex}`);
+  if (progressBar) {
+    progressBar.style.backgroundColor = darkMode ? "oklch(0.232 0.015 30)" : "oklch(1 0 0)";
+    progressBar.style.opacity = "1";
+  }
+}}
+onMouseLeave={() => {
+  const progressBar = document.getElementById(`progress-${index}-${subIndex}`);
+  if (progressBar) {
+    progressBar.style.backgroundColor = darkMode ? "oklch(var(--secondary))" : primaryColor;
+    progressBar.style.opacity = "0.7";
+  }
+}}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-medium">
+                    {subtopic.name}
+                  </span>
+                  <span className="text-sm font-semibold">
+                    {subtopic.percentage}%
+                  </span>
+                </div>
+                <div className="w-full bg-accent/30 rounded-full h-2 overflow-hidden">
+                  <div
+                    id={`progress-${index}-${subIndex}`}
+                    className="h-2 rounded-full transition-all duration-500"
+                    style={{ 
+                      backgroundColor: primaryColor, 
+                      width: `${subtopic.percentage}%`,
+                      opacity: 0.7
+                    }}
+                  />
+                </div>
+                <div className="flex justify-between text-xs mt-1">
+                  <span>{subtopic.solved} solved</span>
+                  <span>{subtopic.total} total</span>
+                </div>
+              </div>
+            ))}
+          </MotionDiv>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+                  
     </div>
   );
 }
