@@ -161,27 +161,28 @@ export default function UserProfile() {
   const yearOptions = [currentYear, currentYear - 1, currentYear - 2];
 
   return (
-    <div className="min-h-screen flex flex-col p-6  mt-6 md:p-10 lg:px-20 bg-secondary/35"> 
+    <div className="min-h-screen flex flex-col p-6  mt-20 md:p-10 lg:px-20 bg-secondary/35"> 
       {/* Top cards row */}
       <div className="flex flex-col lg:flex-row gap-6 w-full mb-6">
         {/* Left Profile Card */}
-        <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-4 md:p-6 flex items-center border border-border/50 w-full lg:w-1/2`}>
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center bg-accent/20">
-            <span className="text-2xl md:text-3xl text-accent">👤</span>
-          </div>
-          <div className="ml-4 md:ml-6">
-            <h2 className="text-lg md:text-xl font-semibold text-foreground">{profile.username}</h2>
-            <Link href="/profile/edit">
-              <button className="mt-2 flex items-center gap-2 px-4 md:px-6 py-2 bg-accent/20 text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300 text-sm md:text-base">
-                <FiEdit2 size={14} />
-                Edit Profile
-              </button>
-            </Link>
-          </div>
-        </div>
+     
+<div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-2xl shadow-md p-4 md:p-6 flex items-center border border-border/50 w-full lg:w-1/2 ml-6`}>
+  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center bg-accent/20 ml-10">
+    <span className="text-3xl md:text-4xl text-accent">👤</span>
+  </div>
+  <div className="ml-5 md:ml-8">
+    <h2 className="text-lg md:text-xl font-semibold text-foreground">{profile.username}</h2>
+    <Link href="/profile/edit">
+      <button className="mt-3 flex items-center gap-2 px-4 md:px-6 py-2 bg-accent/20 text-accent font-semibold rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors duration-300 text-sm md:text-base">
+        <FiEdit2 size={14} />
+        Edit Profile
+      </button>
+    </Link>
+  </div>
+</div>
 
         {/* Progress Card */}
-        <div className={`${darkMode ? "bg-secondary/35" : "bg-white"} rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2`}>
+        <div className="bg-accent/20  text-accent font-semibold   rounded-xl shadow-sm pr-20 pl-20 pt-8 pb-4 flex items-center justify-evenly border border-border/40 w-full lg:w-1/2">
           {/* Circular Progress - Left side */}
 <div className="relative w-24 h-24 md:w-40 md:h-40 flex-shrink-0 ml-2">
   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
@@ -189,7 +190,7 @@ export default function UserProfile() {
       cx="60"
       cy="60"
       r="52"
-      className="stroke-gray-300 dark:stroke-gray-600"
+      className="stroke-[oklch(0.95_0.01_90)] dark:stroke-gray-600"
       strokeWidth="8"
       fill="none"
     />
@@ -216,30 +217,30 @@ export default function UserProfile() {
           
           {/* Difficulty Stats - Right side */}
           <div className="flex-1 ml-6">
-            <div className="flex flex-col gap-3 md:gap-4">
+            <div className="flex flex-col gap-2 md:gap-3">
               <div className="text-right">
-                <div className="mb-1">
+                <div className="">
                   <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Easy</span>
                 </div>
-                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                <span className="text-xs md:text-sm font-normal text-accent">
                   {profile.easy.solved}/{profile.easy.total}
                 </span>
               </div>
 
               <div className="text-right">
-                <div className="mb-1">
-                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Medium</span>
+                <div className="">
+                  <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Medium</span>
                 </div>
-                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                <span className="text-xs md:text-sm font-normal text-accent">
                   {profile.medium.solved}/{profile.medium.total}
                 </span>
               </div>
 
               <div className="text-right">
-                <div className="mb-1">
-                  <span className="text-sm md:text-base font-medium text-accent dark:text-accent">Hard</span>
+                <div className="">
+                  <span className="text-sm md:text-base font-bold text-accent dark:text-accent">Hard</span>
                 </div>
-                <span className="text-xs md:text-sm font-normal text-muted-foreground dark:text-gray-400">
+                <span className="text-xs md:text-sm font-normal text-accent">
                   {profile.hard.solved}/{profile.hard.total}
                 </span>
               </div>
@@ -256,33 +257,34 @@ export default function UserProfile() {
             <h3 className="text-lg font-semibold text-foreground">Problem Solving Calendar</h3>
           </div>
           
+          
           {/* Year Dropdown */}
-          <div className="relative">
-            <button 
-              onClick={() => setShowYearDropdown(!showYearDropdown)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border/50 bg-white dark:bg-secondary/35 text-foreground"
-            >
-              {selectedYear}
-              <FiChevronDown />
-            </button>
-            
-            {showYearDropdown && (
-              <div className="absolute right-0 mt-1 w-full bg-white dark:bg-secondary/35 border border-border/50 rounded-lg shadow-lg z-10">
-                {yearOptions.map(year => (
-                  <button
-                    key={year}
-                    onClick={() => {
-                      setSelectedYear(year);
-                      setShowYearDropdown(false);
-                    }}
-                    className="w-full px-3 py-2 text-left hover:bg-accent/10 text-foreground"
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+<div className="relative">
+  <button 
+    onClick={() => setShowYearDropdown(!showYearDropdown)}
+    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border/50 bg-white dark:bg-accent text-foreground"
+  >
+    {selectedYear}
+    <FiChevronDown />
+  </button>
+  
+  {showYearDropdown && (
+    <div className="absolute right-0 mt-1 w-full bg-white dark:bg-accent border border-border/50 rounded-lg shadow-lg z-10">
+      {yearOptions.slice(0, 2).map(year => (
+        <button
+          key={year}
+          onClick={() => {
+            setSelectedYear(year);
+            setShowYearDropdown(false);
+          }}
+          className="w-full px-3 py-2 text-left hover:bg-accent/10 text-foreground"
+        >
+          {year}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
         </div>
 
         <div className="flex justify-between mb-6">
