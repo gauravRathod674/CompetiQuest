@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
 
-export default function Profile() {
+import UserProfile from "../../components/profile/page";
+
+export default function ProfilePage() {
   return (
-    <div>
-      <h1>User Profile</h1>
+    <div className="relative">
+      <UserProfile />
     </div>
-  )
+  );
 }
