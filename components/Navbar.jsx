@@ -36,7 +36,7 @@ const CategoryDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const categories = [
     "Aptitude",
-    "Reasoning",
+    "Logical Reasoning",
     "English",
     "General Knowledge",
     "Programming",
@@ -63,7 +63,7 @@ const CategoryDropdown = () => {
           {categories.map((cat) => (
             <Link
               key={cat}
-              href="#"
+              href={`/${cat.toLowerCase().replace(/ /g, "_")}`}
               className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             >
               {cat}

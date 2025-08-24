@@ -1,58 +1,108 @@
 import { useState } from "react";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const LoginPage = ({ onFlip }) => {
+const LoginPage = ({ visible, handleClick }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!username.trim()) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    } else if (password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleLogin = () => {
+    if (validate()) {
+      toast.success("Logged in Successfully!");
+      // Proceed with actual login
+    } else {
+      toast.error("Please fix the errors before submitting.");
+    }
+  };
 
   return (
     <div
-      className="absolute inset-0 h-fit flex flex-col items-center justify-center p-8 bg-muted/10 backdrop-blur-xl rounded-2xl shadow-2xl"
-      style={{ backfaceVisibility: "hidden" }}
+      className="w-full h-full flex flex-col items-center justify-center p-12 bg-muted/10 backdrop-blur-xl"
+      style={{
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.3s ease",
+      }}
     >
       <h2 className="text-3xl font-bold mb-6 text-center">Login</h2>
+
       {/* Username */}
       <div className="relative w-full mb-4">
         <input
           type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
-          className="w-full bg-secondary/40 border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+          className={`w-full bg-secondary/40 border ${
+            errors.username ? "border-red-500" : "border-border"
+          } rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300`}
         />
+        {errors.username && (
+          <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+        )}
       </div>
-      {/* password */}
+
+      {/* Password */}
       <div className="relative w-full mb-6">
         <input
           type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          minLength={8}
-          className="w-full bg-secondary/40 border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+          className={`w-full bg-secondary/40 border ${
+            errors.password ? "border-red-500" : "border-border"
+          } rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300`}
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+          className="absolute right-3 top-1/4 transform text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
         >
-          {showPassword ? (
-            <FaRegEyeSlash className="inline-block" />
-          ) : (
-            <FaRegEye className="inline-block" />
-          )}
+          {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
         </button>
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+        )}
       </div>
+
+      {/* Login Button */}
       <button
         type="submit"
-        className="w-full cursor-pointer py-3 mb-4 rounded-xl bg-accent text-accent-foreground font-semibold hover:bg-accent/50 hover:text-accent transition-colors duration-300"
+        onClick={handleLogin}
+        className="w-full cursor-pointer py-3 mb-2 rounded-xl bg-accent text-accent-foreground font-semibold hover:bg-accent/50 hover:text-accent transition-colors duration-300"
       >
         Login
       </button>
-      <div className="flex items-center w-full my-4">
+
+      {/* OR separator */}
+      <div className="flex items-center w-full my-2">
         <hr className="flex-grow border-zinc-700" />
         <span className="mx-4 text-zinc-500">OR</span>
         <hr className="flex-grow border-zinc-700" />
       </div>
-      <button className="cursor-pointer w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold bg-secondary/50 border  hover:bg-secondary transition-colors duration-300">
+
+      {/* Google Button */}
+      <button className="cursor-pointer w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold bg-secondary/50 border hover:bg-secondary transition-colors duration-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"
@@ -86,13 +136,14 @@ const LoginPage = ({ onFlip }) => {
         </svg>
         <span className="ml-4">Log in with Google</span>
       </button>
-
-      <button
-        className="mt-4 text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300 cursor-pointer"
-        onClick={onFlip}
-      >
-        Don't have an account? Sign up
-      </button>
+      <div>
+        <p
+          className="text-sm text-accent cursor-pointer mt-2 "
+          onClick={handleClick}
+        >
+          Don't have an account? Signup
+        </p>
+      </div>
     </div>
   );
 };

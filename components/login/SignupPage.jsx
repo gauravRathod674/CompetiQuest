@@ -2,17 +2,18 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const SignupPage = ({ onFlip }) => {
+const SignupPage = ({ visible, handleClick }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div
-      className="absolute inset-0 h-fit flex flex-col items-center justify-center p-8 bg-muted/10 backdrop-blur-xl rounded-2xl shadow-2xl"
-      style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+      className="w-full h-full flex flex-col items-center justify-center p-12  backdrop-blur-xl"
+      style={{
+        opacity: visible ? 0 : 1,
+        transition: "opacity 0.3s ease",
+      }}
     >
-      <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
-        Sign Up
-      </h2>
-      {/* username */}
+      <h2 className="text-3xl font-bold mb-4 -mt-2 text-center">SignUp</h2>
+      {/* Username */}
       <div className="relative w-full mb-4">
         <input
           type="text"
@@ -21,7 +22,7 @@ const SignupPage = ({ onFlip }) => {
           className="w-full bg-secondary/40 border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
         />
       </div>
-      {/* email */}
+      {/* Email */}
       <div className="relative w-full mb-4">
         <input
           type="email"
@@ -30,7 +31,7 @@ const SignupPage = ({ onFlip }) => {
           className="w-full bg-secondary/40 border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
         />
       </div>
-      {/* password */}
+      {/* Password */}
       <div className="relative w-full mb-6">
         <input
           type={showPassword ? "text" : "password"}
@@ -44,26 +45,24 @@ const SignupPage = ({ onFlip }) => {
           onClick={() => setShowPassword(!showPassword)}
           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
         >
-          {showPassword ? (
-            <FaRegEyeSlash className="inline-block" />
-          ) : (
-            <FaRegEye className="inline-block" />
-          )}
+          {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
         </button>
       </div>
+
       <button
         type="submit"
-        className="cursor-pointer w-full py-3 mb-4 rounded-xl bg-accent text-accent-foreground font-semibold hover:bg-accent/50 hover:text-accent transition-colors duration-300"
+        className="w-full cursor-pointer py-3 mb-1 rounded-xl bg-accent text-accent-foreground font-semibold hover:bg-accent/50 hover:text-accent transition-colors duration-300"
       >
-        Sign Up
+        Signup
       </button>
-      <div className="flex items-center w-full my-4">
+
+      <div className="flex items-center w-full my-2">
         <hr className="flex-grow border-zinc-700" />
         <span className="mx-4 text-zinc-500">OR</span>
         <hr className="flex-grow border-zinc-700" />
       </div>
-      <button className="cursor-pointer w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold bg-secondary/10 border border-border hover:bg-secondary transition-colors duration-300">
-        {/* Google Icon SVG */}
+
+      <button className="cursor-pointer w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold bg-secondary/50 border hover:bg-secondary transition-colors duration-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"
@@ -95,14 +94,16 @@ const SignupPage = ({ onFlip }) => {
             d="M48 48L17 24l-4-3 35-10z"
           />
         </svg>
-        <span className="ml-4">Sign Up with Google</span>
+        <span className="ml-4 ">SignUp with Google</span>
       </button>
-      <button
-        className="cursor-pointer mt-4 text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300"
-        onClick={onFlip}
-      >
-        Already have an account? Login
-      </button>
+      <div>
+        <p
+          className="text-sm text-accent cursor-pointer mt-2 sm:hidden"
+          onClick={handleClick}
+        >
+          Don't have an account? Signup
+        </p>
+      </div>
     </div>
   );
 };
