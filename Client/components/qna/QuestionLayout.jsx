@@ -75,7 +75,7 @@ const Question = ({
           </button>
 
           {showExplanation[q.id] && (
-            <p className="mt-2 p-4 bg-secondary rounded-lg text-muted-foreground">
+            <p className="mt-2 p-4 bg-accent/10 rounded-lg text-muted-foreground">
               {q.explanation}
             </p>
           )}

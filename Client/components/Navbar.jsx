@@ -123,6 +123,8 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
     },
   };
 
+  const formatUrl = (text) => text.toLowerCase().replace(/ /g, "_");
+
   return (
     <>
       <div
@@ -187,7 +189,7 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
                 {subItems.map((item) => (
                   <Link
                     key={item}
-                    href="#"
+                    href={`/${formatUrl(title)}/${formatUrl(item)}/page1`}
                     className="block py-1.5 px-4 text-sm text-muted-foreground hover:text-accent rounded-md hover:bg-accent/10"
                     onClick={closeSidebar}
                   >
@@ -213,10 +215,14 @@ const Sidebar = ({ isOpen, closeSidebar }) => {
           </nav>
 
           <div className="p-4 border-t border-border/50">
-            <button className="w-full flex items-center justify-center gap-3 py-2.5 px-4 bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground rounded-lg font-semibold transition-colors">
+            <Link
+              href="/login"
+              onClick={closeSidebar}
+              className="w-full flex items-center justify-center gap-3 py-2.5 px-4 bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground rounded-lg font-semibold transition-colors"
+            >
               <FiLogIn />
               <span>Login</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
