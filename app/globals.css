@@ -35,25 +35,25 @@
   --radius: 0.625rem;
 
   /* 60% Primary/Background */
-  --background: oklch(1 0 0); /* White */
+  --background: oklch(0.98 0.004 95); /* Soft neutral white instead of pure white */
   --foreground: oklch(0.232 0.015 30); /* Dark Brown/Black */
 
   /* 30% Secondary */
-  --secondary: oklch(0.95 0.01 90); /* ivory */
+  --secondary: oklch(0.96 0.015 95); /* Slightly darker ivory for better separation */
   --secondary-foreground: oklch(0.35 0.05 30);
 
   /* 10% Accent */
-  --accent: oklch(0.536 0.17 21.3); /* #bb5052 - Kept as requested */
+  --accent: oklch(0.536 0.17 21.3); /* #bb5052 */
   --accent-foreground: oklch(1 0 0); /* White */
 
-  --primary: oklch(1 0 0); /* Alias for background */
-  --primary-foreground: oklch(0.232 0.015 30);
+  --primary: var(--background);
+  --primary-foreground: var(--foreground);
 
-  --card: oklch(1 0 0); /* White */
-  --card-foreground: oklch(0.232 0.015 30);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.232 0.015 30);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
 
   --muted: oklch(0.95 0.03 90);
   --muted-foreground: oklch(0.4 0.01 30);
@@ -67,24 +67,24 @@
   --accent-glow: rgba(188, 55, 68, 0.15);
 }
 
-/* Dark Mode Theme - Unchanged */
+/* Dark Mode Theme - Adjusted Secondary Contrast */
 .dark {
   /* 60% Primary/Background */
-  --background: oklch(0.22 0 0); /* #262626 */
+  --background: oklch(0.23 0.01 30); /* Slightly warmer dark gray */
   --foreground: oklch(0.996 0.011 109.3); /* ivory */
 
   /* 30% Secondary */
-  --secondary: oklch(0.25 0.003 260); /* #2B2D2E */
-  --secondary-foreground: oklch(0.996 0.011 109.3); /* ivory */
+  --secondary: oklch(0.28 0.005 260); /* Lighter than background for clear separation */
+  --secondary-foreground: var(--foreground);
 
   /* 10% Accent */
   --accent: #bb5054;
-  --accent-foreground: oklch(0.22 0 0); /* #262626 */
+  --accent-foreground: var(--background);
 
   --primary: var(--background);
   --primary-foreground: var(--foreground);
 
-  --card: oklch(0.25 0.003 260); /* #2B2D2E */
+  --card: oklch(0.25 0.003 260); /* Dark gray but distinct */
   --card-foreground: var(--foreground);
 
   --popover: var(--card);
@@ -101,6 +101,7 @@
   --square-border-color: oklch(from var(--foreground) l c h / 0.05);
   --accent-glow: rgba(187, 80, 82, 0.15);
 }
+
 
 @layer base {
   * {

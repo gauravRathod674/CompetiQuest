@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-<<<<<<< HEAD
 import { useParams } from 'next/navigation'; // Import the useParams hook
-=======
->>>>>>> origin/frontend-login
 import { FiClock } from "react-icons/fi";
 import Squares from "@/components/home/Squares";
 import CategoryCard from "@/components/category/CategoryCard";
@@ -24,16 +21,10 @@ const categories = [
   "Programming",
 ];
 
-<<<<<<< HEAD
 export default function Category() { // Removed {params} from here
   const params = useParams(); // Get params using the hook
   const totalQuestions = 20;
   const { category } = params; // Destructure category from params
-=======
-export default function Category({ params }) {
-  const totalQuestions = 20;
-  const { category } = params;
->>>>>>> origin/frontend-login
   const courses = cardData[category] || [];
   const pageNumber = 1;
   const questionsPerPage = 5;
@@ -71,15 +62,10 @@ export default function Category({ params }) {
               className="text-xl sm:text-6xl font-extrabold text-foreground 
                 drop-shadow-[0_0_25px_var(--accent-glow)]"
             >
-<<<<<<< HEAD
               {typeof category === 'string'
                 ? category.charAt(0).toUpperCase() +
                   category.slice(1).replace(/_/g, " ")
                 : ''}
-=======
-              {category.charAt(0).toUpperCase() +
-                category.slice(1).replace(/_/g, " ")}
->>>>>>> origin/frontend-login
             </h1>
           </div>
         </div>
@@ -105,8 +91,4 @@ export default function Category({ params }) {
       </main>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/frontend-login

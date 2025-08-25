@@ -2,6 +2,12 @@
 
 import { useRouter, usePathname } from "next/navigation";
 
+// Helper function to format the title for the URL
+const formatTitleForUrl = (title) => {
+  // Replaces one or more spaces with an underscore and converts to lowercase
+  return title.replace(/\s+/g, "_").toLowerCase();
+};
+
 export default function CategoryCard({
   title,
   chapters,
@@ -14,14 +20,14 @@ export default function CategoryCard({
   const strokeDashoffset = strokeDasharray * (1 - progress);
   const progressPercentage = Math.round(progress * 100);
   const router = useRouter();
+  const pathname = usePathname(); // gets current path, e.g., /aptitude
 
-  const pathname = usePathname(); // gets current full route
-  const handleClick = (title) => {
-    const formatTitle = (title) =>
-      decodeURIComponent(title).replace(/\s+/g, "_").toLowerCase();
-
-    const t = formatTitle(title); // ← call the function with the argument
-    router.push(`${pathname}/${t}/page1`);
+  // Handles the navigation to the specific category item page
+  const handleClick = () => {
+    // Format the title to be URL-friendly (e.g., "Time and Work" -> "time_and_work")
+    const formattedTitle = formatTitleForUrl(title);
+    // Push the new route to the router
+    router.push(`${pathname}/${formattedTitle}/page1`);
   };
 
   return (
@@ -42,7 +48,7 @@ export default function CategoryCard({
         {/* Progress circle SVG */}
         <div
           className="absolute -bottom-10 right-4 z-10 "
-          onClick={() => handleClick(title.toLowerCase())}
+          onClick={handleClick} // Updated onClick handler
         >
           <PlayButton
             progressPercentage={progressPercentage}
