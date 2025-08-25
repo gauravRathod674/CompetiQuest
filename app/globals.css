@@ -70,7 +70,7 @@
 /* Dark Mode Theme - Adjusted Secondary Contrast */
 .dark {
   /* 60% Primary/Background */
-  --background: oklch(0.23 0.01 30); /* Slightly warmer dark gray */
+  --background: oklch(0.22 0 0); /* Slightly warmer dark gray */
   --foreground: oklch(0.996 0.011 109.3); /* ivory */
 
   /* 30% Secondary */
@@ -95,7 +95,7 @@
 
   --destructive: oklch(0.536 0.17 24.3); /* #bb5052 */
 
-  --border: oklch(0.3 0.005 260);
+  --border: oklch(0.38 0.005 260);
   --input: oklch(0.3 0.005 260);
   --ring: oklch(0.536 0.17 21.3 / 0.6);
   --square-border-color: oklch(from var(--foreground) l c h / 0.05);
