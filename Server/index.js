@@ -22,7 +22,6 @@ const topicRoutes = require('./Routes/TopicRoutes.js');
 const questionRoutes = require('./Routes/QuestionRoutes.js');
 const quizRoutes = require('./Routes/QuizRoutes.js');
 const categoryRoutes = require('./Routes/CategoryRoutes.js');
-const categoryRoutes = require('./Routes/CategoryRoutes.js');
 
 // API Endpoints
 app.use('/api/auth', authRoutes);
